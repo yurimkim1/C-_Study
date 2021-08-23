@@ -6,13 +6,14 @@
 
 using namespace std;
 
+
 int g_nData = 10;
 void Gugudan(void)
 {
 	cout << "Global::Gugudan()" << endl;
 }
 
-namespace TEST 
+namespace TEST
 {
 	int g_nData = 100;
 	void Gugudan(void)
@@ -24,12 +25,12 @@ namespace TEST
 void Swap(int a, int b)
 {
 	int temp;
-
+	
 	temp = a;
 	a = b;
 	b = temp;
 
-	cout << "Swap :" << "a=" << a << "b=" << b << endl;
+	cout << "SWAP : " << "a=" << a << " b=" << b << endl;
 }
 
 void Swap2(int* a, int* b)
@@ -40,7 +41,7 @@ void Swap2(int* a, int* b)
 	*a = *b;
 	*b = temp;
 
-	cout << "Swap2 :" << "a=" << *a << "b=" << *b << endl;
+	cout << "SWAP2 : " << "a=" << *a << " b=" << *b << endl;
 }
 
 void Swap3(int& a, int& b)
@@ -51,7 +52,7 @@ void Swap3(int& a, int& b)
 	a = b;
 	b = temp;
 
-	cout << "Swap3 :" << "a=" << a << "b=" << b << endl;
+	cout << "SWAP3 : " << "a=" << a << " b=" << b << endl;
 }
 
 int Sum(int a, int b)
@@ -77,20 +78,19 @@ int TestFunc(int a = 10)
 	return a;
 }
 
-int TestFunc2(int a, int b=20, int c=30)
+int TestFunc2(int a, int b = 20, int c = 30)
 {
 	return a+b+c;
 }
 
 #define ADD(a, b) (a + b) //매크로(C 제공)
 
-
 int Add(int a, int b)// 함수(C 제공)
 {
 	return a + b;
 }
 
-inline int AddNew(int a, int b)// 인라인함수(C++ 제공)
+inline int AddNew(int a, int b)//  인라인함수(C++ 제공)
 {
 	return a + b;
 }
@@ -106,17 +106,18 @@ int main()
 		int a = 10;
 		int b = 20;
 
-		printf("a = %d b = %d\n", a, b);
-		std::cout << "a= " << a << " b= " << b << "\n";
+		printf("a=%d, b=%d\n", a, b);
+		std::cout << "a=" << a << ", b=" << b << "\n";
+
 
 		std::cout << a << std::endl;//"\n"
 		std::cout << &a << std::endl;//"\n"
 		std::cout << sizeof(a) << std::endl;//"\n"
+
 		std::cout << printf << std::endl;//"\n"
 		std::cout << main << std::endl;//"\n"
 
-
-		cout << "Bye" << "\n"; // namespace 선언시 생략가능
+		cout << "Bye" << "\n";
 	}
 	//cin 객체
 	if (0)
@@ -134,16 +135,16 @@ int main()
 		cout << "직업을 입력하세요 : " << endl;
 		cin >> strJob;
 
-		cout << "이름 :" << strName << endl;
-		cout << "나이 :" << nAge << endl;
-		cout << "직업 :" << strJob << endl;
+		cout << "이름 : " << strName << endl;
+		cout << "나이 : " << nAge << endl;
+		cout << "직업 : " << strJob << endl;
 	}
 	//auto
 	if (0)
 	{
 		int a = 10;
 		int b(a);
-		auto c(a);
+		auto c = a;
 
 		cout << a << endl;
 		cout << b << endl;
@@ -157,14 +158,14 @@ int main()
 		TEST::Gugudan();
 
 		using namespace TEST;
-		//Gugudan();//ERROR
+		//Gugudan();//???
 		::Gugudan();//OK
 	}
 
-	//Pointer(C) VS Reference(CPP)
+	//Pointer(C/CPP:주소) VS Reference(CPP:별명)
 	if (0)
 	{
-		//Pointer(C)------------------------
+		//Pointer(c)-------------------
 		int a = 10;
 		int* p1 = &a;
 
@@ -176,50 +177,50 @@ int main()
 
 		cout << sizeof(b) << endl;//1B
 		cout << sizeof(p2) << endl;//4B
-		// 모든 주소는 4Byte
 
-		//Reference(CPP)-------------------------
+		//Reference(CPP)------------------
 		int nData = 10;
-		int& ref = nData;//레퍼런스(별명) // ndata가 ref라고도 불림, 말그대로 ndata의 별명이됨
+		int& ref = nData;//레퍼런스(별명)
 		//int& ref2;
 
 		nData++;//11
 		cout << nData << endl;
 		cout << ref << endl;
 
-		ref++;//11
+		ref++;//??
 		cout << nData << endl;
 		cout << ref << endl;
 	}
 	//함수호출 방식
-	if (0) 
+	if (0)
 	{
 		int a = 10;
 		int b = 20;
 		cout << "a=" << a << "b=" << b << endl;
 
 		//C방식
-		//1) Call by Value(값의 복사)-----> 사용쉽다. 영향을 받지 않음
+		//1) Call by Value(값의 복사)------> 사용쉽다. 영향을 받지 않음
+		a = 10; b = 20;
 		Swap(a, b);
-		cout << "a=" << a << "b=" << b << endl;
+		cout << "a=" << a << " b=" << b << endl;
 
 		//2) Call by Address(주소의 전달)--> 사용어렵다. 영향을 받음
 		a = 10; b = 20;
 		Swap2(&a, &b);
-		cout << "a=" << a << "b=" << b << endl;
+		cout << "a=" << a << " b=" << b << endl;
 
 		//C++방식
-		//3) Call by Reference -----> 사용쉽다. 영향을 받음
+		//3) Call by Reference ---------> 사용쉽다. 영향을 받음
 		a = 10; b = 20;
 		Swap3(a, b);
-		cout << "a=" << a << "b=" << b << endl;
+		cout << "a=" << a << " b=" << b << endl;
 	}
 
-	//함수 오버로딩(다중정의) by 네임맹글링
+	//함수 오버로딩(다중정의) --- by 네임맹글링
 	if (0)
 	{
 		cout << Sum(10, 20) << endl;
-		cout  << Sum(10, 20, 30) << endl;
+		cout << Sum(10, 20, 30) << endl;
 		cout << Sum(10.5, 20.9) << endl;
 	}
 
@@ -228,36 +229,43 @@ int main()
 	{
 		cout << TestFunc(100) << endl;//100
 		cout << TestFunc() << endl;//10
-
+				
+		/// //////////////
+		
 		//cout << TestFunc2() << endl;//error
-		cout << TestFunc2(1) << endl;//1+20+20
-		cout << TestFunc2(1,2) << endl;//1+2+30
-		cout << TestFunc2(1,2,3) << endl;//1+2+3
+		cout << TestFunc2(1) << endl;//1+20+30
+		cout << TestFunc2(1, 2) << endl;//1+2+30
+		cout << TestFunc2(1, 2, 3) << endl;//6
 	}
 
-	//동적메모리(C: malloc/free, C++: new/delete)
+	//동적메모리(C: malloc()/free()/ C++: new/delete)
 	if (0)
 	{
+		int count;
+		cout << "학생이 총 몇 명입니까? ";
+		cin >> count;
+
+		int kor[ 10 ];//정적 메모리 : Compile time에 결정
+		//int eng[ count ];//error
 
 		//C: malloc/free
-		int* p = (int*) malloc(sizeof(int) * 4); //==int [4]
-		p[0] = 10;
-		//*(p + 0) = 10;
-		//*p = 10;
+		int* p = (int*) malloc(sizeof(int)*count);//== int [4]
+		p[0]		= 10;	
+		*(p + 0)	= 10;
+		*p			= 10;
 
-		p[1] = 20;
-		//*(p + 1) = 20;
-
+		p[1]		= 20;
+		*(p + 1)	= 20;
+		
 		p[2] = 30;
 		p[3] = 40;
 		free(p);
-		///////////////////
-
-		//C++: new / delete
+		//////////////////////////////////////////
+		//C++: new/delete
 		int* p2 = new int;
 		*p2 = 100;
 
-		int* p3 = new int(10); //초기값10 할당함
+		int* p3 = new int(10);//초기값10 할당함
 
 		cout << *p2 << endl;
 		cout << *p3 << endl;
@@ -265,10 +273,10 @@ int main()
 		delete p2;
 		delete p3;
 
-		////////////////////
+		//////////////////////////////////////////
 		//배열
-		int* p4 = new int[5];
-		for (int i = 0; i < 5; i++)
+		int* p4 = new int[count];
+		for (int i = 0; i < count; i++)
 		{
 			p4[i] = i * 10;
 			cout << p4[i] << endl;
@@ -276,24 +284,25 @@ int main()
 		delete[] p4;
 	}
 
-	//범위기반 for문
+	// 범위기반 for문
 	if (0)
 	{
-		//int aList[5] = { 10,20,30,40,50 };
-		int aList[5] = { 0, }; // 전체 0으로 저장됨
+		//int aList[5] = { 10, 20, 30, 40, 50 };
+		float aList[5] = { 0, };
 
 		//기존 for문
 		for (int i = 0; i < 5; i++)
 		{
 			cout << aList[i] << endl;
 		}
+
 		//범위기반 for문
 		for (auto x : aList)//값의 복사
 		{
 			cout << x << endl;
 		}
-		cout << endl;
-		for (auto& x : aList)//참조(=별명)(복사X) // 성능이 더 좋음
+		cout << endl;//////////
+		for (auto& x : aList)//참조(=별명)(복사X)
 		{
 			cout << x << endl;
 		}
@@ -310,7 +319,7 @@ int main()
 		cout << AddNew(a, b) << endl;//인라인함수 호출(C++ 제공)
 	}
 
-	return 0; //정상종료
+	return 0;//정상종료
 }
 
 #endif

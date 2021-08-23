@@ -1,6 +1,6 @@
 #pragma once
-//선언부
-class MyString
+
+class MyString 
 {
 public:
 	MyString();//기본 생성자
@@ -10,13 +10,13 @@ public:
 	~MyString();
 
 	//연산자 오버로딩
-	// left = right
+	// left = right;
 	// left operator=(right);
 	MyString& operator=(const MyString& right);
 
 	//정적멤버 변수(=클래스의 멤버변수)
 	static int m_nCount;//현재까지 생성된 인스턴스의 갯수 관리용
-
+		
 private:
 	char* m_pszData;//동적메모리(4B)-->malloc/free
 	int m_nLength;//문자열의 길이
@@ -26,4 +26,10 @@ public:
 	const char* GetString() const;
 private:
 	void Release();//동적 메모리 해제함수
+};
+
+class FunnyString : public MyString
+{
+public:
+	int SetString(const char* pszParam);
 };
